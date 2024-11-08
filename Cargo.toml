@@ -1,0 +1,8 @@
+[package]
+name = "flappy"
+version = "0.1.0"
+authors = ["Miquel A. Cabot <miquel.cabot@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+bracket-lib = "~0.8.7"
