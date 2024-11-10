@@ -1,6 +1,4 @@
-# flappy
-
-Flappy Dragon game
+# Flappy Dragon game
 
 ## Getting Started
 
