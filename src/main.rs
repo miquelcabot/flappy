@@ -90,7 +90,9 @@ impl Obstacle {
 struct State {
     player: Player,
     frame_time: f32,
+    obstacle: Obstacle,
     mode: GameMode,
+    score: i32,
 }
 
 impl State {
@@ -98,7 +100,9 @@ impl State {
         Self {
             player: Player::new(5, 25),
             frame_time: 0.0,
+            obstacle: Obstacle::new(SCREEN_WIDTH, 0),
             mode: GameMode::Menu,
+            score: 0,
         }
     }
 
@@ -115,7 +119,14 @@ impl State {
         }
         self.player.render(ctx);
         ctx.print(0, 0, "Press SPACE to flap.");
-        if self.player.y > SCREEN_HEIGHT {
+        ctx.print(0, 1, &format!("Score: {}", self.score));
+
+        self.obstacle.render(ctx, self.player.x);
+        if self.player.x > self.obstacle.x {
+            self.score += 1;
+            self.obstacle = Obstacle::new(self.player.x + SCREEN_WIDTH, self.score);
+        }
+        if self.player.y > SCREEN_HEIGHT || self.obstacle.hit_obstacle(&self.player) {
             self.mode = GameMode::End;
         }
     }
